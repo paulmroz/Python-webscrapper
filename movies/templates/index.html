@@ -1,58 +1,52 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Test</h1>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="#">IMDBWebscrapper</a>
 
-<!--<div>-->
-<!--    {% if movies.has_previous %}-->
-<!--        <a href="?page=1"><<</a>-->
-<!--        <a href="?page={{movies.previous_page_number}}"><</a>-->
-<!--    {% endif %}-->
+  <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo03">
+        <form class="float-right form-inline mt-2 mt-lg-0 ">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+  </div>
+</nav>
 
-<!--    {% for num in movies.paginator.page_range %}-->
-<!--        {%if num > movies.number|add:'-3' and num < movies.number|add:'3' %}-->
-
-<!--            {{num}}-->
-
-<!--        {% endif %}-->
-<!--    {% endfor %}-->
-
-<!--    {% if movies.has_next %}-->
-<!--        <a href="?page={{movies.next_page_number}}">></a>-->
-<!--        <a href="?page={{movies.paginator.num_pages}}">>></a>-->
-<!--    {% endif %}-->
-<!--</div>-->
-
-{% if movies.has_other_pages %}
-
-    <ul>
-        {% if movies.has_previous %}
-            <li><a href="?page={{movies.previous_page_number}}">&laquo;</a></li>
-        {% else %}
-            <li class="disabled"><span>&laquo;</span></li>
-        {% endif %}
-
-        {% for num in movies.paginator.page_range %}
-            {%if num > movies.number|add:'-3' and num < movies.number|add:'3' %}
-                {% if movies.number == num  %}
-                <li><span>{{num}}<span>(current)</span></span></li>
-                {% else %}
-                <li><a href="?page={{num}}">{{num}}</a></li>
-                {% endif %}
-            {% endif %}
-        {% endfor %}
-        {% if movies.has_next %}
-            <li><a href="?page={{movies.next_page_number}}">&raquo;</a></li>
-        {% else %}
-            <li class="disabled"><span>&raquo;</span></li>
-        {% endif %}
-    </ul>
-{% endif %}
 <ul>
     {% for movie in movies %}
     <li>{{movie.name}}</li>
     {% endfor %}
 </ul>
+
+
+{% if movies.has_other_pages %}
+
+    <ul class="pagination justify-content-cente">
+        {% if movies.has_previous %}
+            <li class="page-item"><a href="?page={{movies.previous_page_number}}" class="page-link">Previous</a></li>
+        {% else %}
+            <li class="page-item disabled"><span class="page-link">Previous</span></li>
+        {% endif %}
+
+        {% for num in movies.paginator.page_range %}
+            {%if num > movies.number|add:'-3' and num < movies.number|add:'3' %}
+                {% if movies.number == num  %}
+        <li class="page-item"><span class="page-link"><strong>{{num}}</strong></span></li>
+                {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{num}}">{{num}}</a></li>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+        {% if movies.has_next %}
+            <li><a class="page-link" href="?page={{movies.next_page_number}}">Next</a></li>
+        {% else %}
+            <li class="page-item disabled"><span class="page-link">Next</span></li>
+        {% endif %}
+    </ul>
+{% endif %}
 
 {% endblock %}
 
