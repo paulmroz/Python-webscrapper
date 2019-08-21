@@ -3,10 +3,57 @@
 {% block content %}
 <h1>Test</h1>
 
+<!--<div>-->
+<!--    {% if movies.has_previous %}-->
+<!--        <a href="?page=1"><<</a>-->
+<!--        <a href="?page={{movies.previous_page_number}}"><</a>-->
+<!--    {% endif %}-->
+
+<!--    {% for num in movies.paginator.page_range %}-->
+<!--        {%if num > movies.number|add:'-3' and num < movies.number|add:'3' %}-->
+
+<!--            {{num}}-->
+
+<!--        {% endif %}-->
+<!--    {% endfor %}-->
+
+<!--    {% if movies.has_next %}-->
+<!--        <a href="?page={{movies.next_page_number}}">></a>-->
+<!--        <a href="?page={{movies.paginator.num_pages}}">>></a>-->
+<!--    {% endif %}-->
+<!--</div>-->
+
+{% if movies.has_other_pages %}
+
+    <ul>
+        {% if movies.has_previous %}
+            <li><a href="?page={{movies.previous_page_number}}">&laquo;</a></li>
+        {% else %}
+            <li class="disabled"><span>&laquo;</span></li>
+        {% endif %}
+
+        {% for num in movies.paginator.page_range %}
+            {%if num > movies.number|add:'-3' and num < movies.number|add:'3' %}
+                {% if movies.number == num  %}
+                <li><span>{{num}}<span>(current)</span></span></li>
+                {% else %}
+                <li><a href="?page={{num}}">{{num}}</a></li>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+        {% if movies.has_next %}
+            <li><a href="?page={{movies.next_page_number}}">&raquo;</a></li>
+        {% else %}
+            <li class="disabled"><span>&raquo;</span></li>
+        {% endif %}
+    </ul>
+{% endif %}
 <ul>
     {% for movie in movies %}
-        <li>{{movie.name}}</li>
+    <li>{{movie.name}}</li>
     {% endfor %}
 </ul>
 
 {% endblock %}
+
+

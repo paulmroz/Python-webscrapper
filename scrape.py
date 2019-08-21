@@ -1,7 +1,6 @@
 from time import sleep
 from random import randint
 import mysql.connector
-import re
 from bs4 import BeautifulSoup
 import requests
 import csv
@@ -24,7 +23,7 @@ csv_writer = csv.writer(csv_file)
 
 csv_writer.writerow(['Title', 'Year', 'IMDB rating', 'Metascore', 'Votes', 'Description', 'Type'])
 
-pages = numpy.arange(0, 50, 50)
+pages = numpy.arange(0, 250, 50)
 
 titles = []
 years = []
@@ -79,14 +78,9 @@ for page in pages:
                 movie_genre
             ])
 
-            sqlFormula = "INSERT INTO movies_movie(name, year, description, imdb_rating, metascore, votes, type) VALUES(%s, %s, %s, %s, %s, %s, %s) "
-            # val = (movie_title,
-            #        movie_year,
-            #        movie_description,
-            #        movie_rating_imdb,
-            #        movie_metascore,
-            #        movie_votes,
-            #        movie_genre,)
+            sqlFormula = "INSERT INTO movies_movie(name, year, description, imdb_rating, metascore, votes, " \
+                         "type) VALUES(%s, %s, %s, %s, %s, %s, %s) "
+
             mycursor.execute(sqlFormula, (movie_title,
                              movie_year,
                              movie_description,
