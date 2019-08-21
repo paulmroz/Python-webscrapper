@@ -6,7 +6,7 @@ from django.core.paginator import Paginator
 def index(request):
     movies = Movie.objects.all()
 
-    paginator = Paginator(movies, 10)
+    paginator = Paginator(movies, 15)
 
     page = request.GET.get('page')
 
