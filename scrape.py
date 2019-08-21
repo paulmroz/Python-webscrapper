@@ -1,11 +1,22 @@
 from time import sleep
 from random import randint
-
-import pandas as pd
+import mysql.connector
+import re
 from bs4 import BeautifulSoup
 import requests
 import csv
 import numpy
+
+mydb = mysql.connector.connect(
+    host="localhost",
+    user="paul",
+    passwd="space",
+    database="movies_webscraping"
+)
+
+mycursor = mydb.cursor()
+sqlFormula = "TRUNCATE TABLE movies_movie"
+mycursor.execute(sqlFormula)
 
 csv_file = open('cms_scrape.csv', 'w')
 
@@ -13,7 +24,7 @@ csv_writer = csv.writer(csv_file)
 
 csv_writer.writerow(['Title', 'Year', 'IMDB rating', 'Metascore', 'Votes', 'Description', 'Type'])
 
-pages = numpy.arange(0,10000, 50)
+pages = numpy.arange(0, 50, 50)
 
 titles = []
 years = []
@@ -39,7 +50,7 @@ for page in pages:
             titles.append(movie_title)
 
             movie_year = movie_card.h3.find('span', class_='lister-item-year text-muted unbold').text
-            movie_year = movie_year[-6:]
+            movie_year = movie_year[-5:-1]
             years.append(movie_year)
 
             movie_rating_imdb = float(movie_card.strong.text)
@@ -68,6 +79,22 @@ for page in pages:
                 movie_genre
             ])
 
+            sqlFormula = "INSERT INTO movies_movie(name, year, description, imdb_rating, metascore, votes, type) VALUES(%s, %s, %s, %s, %s, %s, %s) "
+            # val = (movie_title,
+            #        movie_year,
+            #        movie_description,
+            #        movie_rating_imdb,
+            #        movie_metascore,
+            #        movie_votes,
+            #        movie_genre,)
+            mycursor.execute(sqlFormula, (movie_title,
+                             movie_year,
+                             movie_description,
+                             movie_rating_imdb,
+                             movie_metascore,
+                             movie_votes,
+                             movie_genre))
+            mydb.commit()
 
-
-
+mydb.close()
+mycursor.close()
