@@ -12,3 +12,4 @@ class Movie(models.Model):
     votes = models.IntegerField()
     description = models.CharField(max_length=2000)
     type = models.CharField(max_length=255)
+    url = models.CharField(max_length=2083)

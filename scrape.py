@@ -45,6 +45,11 @@ for page in pages:
     for movie_card in soup.find_all('div', class_='lister-item mode-advanced'):
 
         if movie_card.find('div', class_='ratings-metascore') is not None:
+
+            movie_poster = movie_card.find('div', class_='lister-item-image')
+            movie_poster = movie_poster.a.img
+            movie_poster = movie_poster['loadlate']
+
             movie_title = movie_card.h3.a.text
             titles.append(movie_title)
 
@@ -79,7 +84,7 @@ for page in pages:
             ])
 
             sqlFormula = "INSERT INTO movies_movie(name, year, description, imdb_rating, metascore, votes, " \
-                         "type) VALUES(%s, %s, %s, %s, %s, %s, %s) "
+                         "type, url) VALUES(%s, %s, %s, %s, %s, %s, %s, %s) "
 
             mycursor.execute(sqlFormula, (movie_title,
                              movie_year,
@@ -87,7 +92,8 @@ for page in pages:
                              movie_rating_imdb,
                              movie_metascore,
                              movie_votes,
-                             movie_genre))
+                             movie_genre,
+                             movie_poster))
             mydb.commit()
 
 mydb.close()
