@@ -23,7 +23,7 @@ csv_writer = csv.writer(csv_file)
 
 csv_writer.writerow(['Title', 'Year', 'IMDB rating', 'Metascore', 'Votes', 'Description', 'Type'])
 
-pages = numpy.arange(0, 250, 50)
+pages = numpy.arange(0, 1000, 50)
 
 titles = []
 years = []
@@ -36,7 +36,7 @@ type = []
 for page in pages:
 
     source = requests.get(
-        f'https://www.imdb.com/search/title/?release_date=2010-01-01,2019-12-31&start={page}&ref_=adv_nxt').text
+        f'https://www.imdb.com/search/title/?release_date=2000-01-01,2019-12-31&start={page}&ref_=adv_nxt').text
 
     sleep(randint(3, 7))
 
