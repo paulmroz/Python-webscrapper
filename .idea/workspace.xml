@@ -3,11 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ae9d07f3-e4f0-44f1-91af-9cbae513e633" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms_scrape.csv" beforeDir="false" afterPath="$PROJECT_DIR$/cms_scrape.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movies/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/movies/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movies/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/movies/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pymovie/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/pymovie/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scrape.py" beforeDir="false" afterPath="$PROJECT_DIR$/scrape.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -95,6 +90,9 @@
       <updated>1566206341276</updated>
     </task>
     <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.css" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
