@@ -23,7 +23,7 @@ csv_writer = csv.writer(csv_file)
 
 csv_writer.writerow(['Title', 'Year', 'IMDB rating', 'Metascore', 'Votes', 'Description', 'Type'])
 
-pages = numpy.arange(0, 1000, 50)
+pages = numpy.arange(0, 10000, 50)
 
 titles = []
 years = []
@@ -56,6 +56,11 @@ for page in pages:
             movie_year = movie_card.h3.find('span', class_='lister-item-year text-muted unbold').text
             movie_year = movie_year[-5:-1]
             years.append(movie_year)
+            try:
+                movie_year = int(movie_year)
+            except:
+                movie_year = 0000
+                pass
 
             movie_rating_imdb = float(movie_card.strong.text)
             imdb_ratings.append(movie_rating_imdb)
@@ -87,13 +92,13 @@ for page in pages:
                          "type, url) VALUES(%s, %s, %s, %s, %s, %s, %s, %s) "
 
             mycursor.execute(sqlFormula, (movie_title,
-                             movie_year,
-                             movie_description,
-                             movie_rating_imdb,
-                             movie_metascore,
-                             movie_votes,
-                             movie_genre,
-                             movie_poster))
+                                          movie_year,
+                                          movie_description,
+                                          movie_rating_imdb,
+                                          movie_metascore,
+                                          movie_votes,
+                                          movie_genre,
+                                          movie_poster))
             mydb.commit()
 
 mydb.close()

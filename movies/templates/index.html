@@ -7,12 +7,14 @@
     {% for movie in movies %}
     <div class="card w-100 d-flex flex-row">
         <div class="card-body d-flex flex-row">
-            <img src="{{movie.url}}" class="img-thumbnail rounded float-left mr-2 p-4">
+            <img src="{{movie.url}}" class="img-thumbnail img-responsive rounded float-left mr-2 p-4">
             <div>
                 <h5 class="card-title mb-1">{{movie.name}}</h5>
                 <p class="card-text h6">{{movie.description}}</p>
                 <span class="badge badge-dark">{{movie.type}}</span>
+
                 <p class="card-text mb-0"><strong>Release year: {{movie.year}}</strong></p>
+                <span class="badge badge-info"><span>Rating: </span>{{movie.imdb_rating}}</span>
                 {% if movie.metascore > 75 %}
                 <p class="card-text badge badge-success mb-0">Metascore: {{movie.metascore}}</p>
                 {% elif movie.metascore > 50 and movie.metascore < 75 %}
