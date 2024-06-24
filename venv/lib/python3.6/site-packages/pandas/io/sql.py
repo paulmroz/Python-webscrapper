@@ -1756,7 +1756,7 @@ class SQLiteDatabase(PandasSQL):
 
         wld = "?"
         query = (
-            "SELECT name FROM sqlite_master " "WHERE type='table' AND name={wld};"
+            "SELECT name FROM sqlite_main " "WHERE type='table' AND name={wld};"
         ).format(wld=wld)
 
         return len(self.execute(query, [name]).fetchall()) > 0
